@@ -26,5 +26,4 @@ for pkg in ${packages[@]}; do
 
 		pacman -S "$pkg"
 		echo "$pkg has been installed"
-	fi
 done
