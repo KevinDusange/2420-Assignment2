@@ -18,6 +18,7 @@ git clone https://gitlab.com/cit2420/2420-as2-starting-files
 # Now we will use GETOPS to give the user options to install packages, create symlinks, or both
 # The options are -p for packages, -s for symlinks, and -a for all
 # If the user does not provide an option we will echo a message to let them know they need to provide an option or if the user provides an option that is not -p, -s, or -a we will echo a message to let them know the option is invalid
+# We can do bash filename to run the script for the options
 
 while getopts "psa" opt; do
     case ${opt} in
