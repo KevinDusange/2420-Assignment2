@@ -5,15 +5,16 @@ if [[ ! "$UID" -eq 0 ]]; then
 	exit 1
 fi
 
+# We can use the $USER variable which uses the current user's username executing the script.
+# This way we can use the script on any user and it will create the symbolic links for that user.
 
 # Symbolic link for the config directory and its files
-ln -s /home/arch/2420-as2-starting-files/config/ /home/arch/.config/
+ln -s /home/$USER/2420-as2-starting-files/config/ /home/.config/
 
 # Symbolic link for the bin directory and its files
-ln -s /home/arch/2420-as2-starting-files/bin/ /home/arch/bin/
+ln -s /home/$USER/2420-as2-starting-files/bin/ /home/bin/
 
 # Symbolic link for the home directory
-ln -s /home/arch/2420-as2-starting-files/home/bashrc /home/arch/.bashrc
-
+ln -s /home/$USER/2420-as2-starting-files/home/bashrc /home/.bashrc
 
 echo "symbolic links created successfully!"
