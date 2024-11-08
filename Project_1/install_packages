@@ -8,9 +8,6 @@ if [[ ! "$UID" -eq 0 ]]; then
 	exit 1
 fi
 
-# After error checking for sudo or root we can clone the starting files
-# git clone https://gitlab.com/cit2420/2420-as2-starting-files
-
 # Define a list of packages to install
 # the packages we want to install and we will use cat to read the contents
 # of the packages.txt file and save it into the packages variable.
@@ -24,23 +21,10 @@ packages=($(cat "packages.txt"))
 
 for pkg in ${packages[@]}; do
 
-	# Check if the package is in the list of installed packages using the -Q after
-	# the pacman command (-Q searches the package database and will output the
-	# package name and version).
-	# If it is installed, we echo the package is already installed.
-	# We use /dev/null to discard data we do not need to see (like an error if the package is
-	# not installed or to discard the package name because we are echoing it on the next line so
-	# we don't need to repeat it before, we are only interested to see if the package
-	# is in the list or not).
-	
-		if pacman -Q "$pkg" > /dev/null; then 
-		echo "$pkg is already installed!"
-	else
-		# If not installed we install using pacman -S (-S will install the package from the repos).
+		# We will install the required packages using pacman -S (pacman is the arch linux package manager and -S will install the package from the repos or re-install them if they are already installed).
 		# Once installed we echo the package has been installed
 
 		pacman -S "$pkg"
 		echo "$pkg has been installed"
 	fi
 done
-

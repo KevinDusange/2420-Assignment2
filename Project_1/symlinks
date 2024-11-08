@@ -9,12 +9,12 @@ fi
 # This way we can use the script on any user and it will create the symbolic links for that user.
 
 # Symbolic link for the config directory and its files
-ln -s /home/$USER/2420-as2-starting-files/config/ /home/.config/
+ln -s /home/$USER/2420-as2-starting-files/config ~/.config
 
 # Symbolic link for the bin directory and its files
-ln -s /home/$USER/2420-as2-starting-files/bin/ /home/bin/
+ln -s /home/$USER/2420-as2-starting-files/bin ~/bin
 
 # Symbolic link for the home directory
-ln -s /home/$USER/2420-as2-starting-files/home/bashrc /home/.bashrc
+ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc
 
 echo "symbolic links created successfully!"

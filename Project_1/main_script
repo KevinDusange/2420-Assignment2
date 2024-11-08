@@ -1,3 +1,48 @@
 #!/bin/bash
 
 # This script will run the main script of the project
+# it will create the symbolic links for the config, bin, and home directories
+# and it will install the packages from the packages.txt file
+
+# Check if the user is root or can run sudo. If the User ID is not equal to 0 (root user)
+
+if [[ ! "$UID" -eq 0 ]]; then
+    echo "You must run this script as sudo or root. Ex 'sudo ./main_script' and don't forget to 'chmod +x main_script' before that"
+    exit 1
+fi
+
+# After error checking for sudo or root we can clone the starting files
+
+git clone https://gitlab.com/cit2420/2420-as2-starting-files
+
+# Now we will use GETOPS to give the user options to install packages, create symlinks, or both
+# The options are -p for packages, -s for symlinks, and -a for all
+# If the user does not provide an option we will echo a message to let them know they need to provide an option or if the user provides an option that is not -p, -s, or -a we will echo a message to let them know the option is invalid
+
+while getopts "psa" opt; do
+    case ${opt} in
+        p)
+            bash ./install_packages
+            echo "Packages have been installed"
+        ;;
+        s)
+            bash ./symlinks
+            echo "Symbolic links have been created"
+        ;;
+        a) 
+            bash ./install_packages
+            bash ./symlinks
+            echo "Packages have been installed and symbolic links have been created"
+        ;;
+        *)
+            echo "Invalid option"
+            exit 1
+        ;;
+    esac
+done
+
+# If the user does not provide an option we will echo a message to let them know they need to provide an option
+if [[ $OPTIND -eq 1 ]]; then
+    echo "No options were provided, please provide an option."
+    exit 1
+fi
