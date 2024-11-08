@@ -15,6 +15,7 @@ ln -s /home/$USER/2420-as2-starting-files/config ~/.config
 ln -s /home/$USER/2420-as2-starting-files/bin ~/bin
 
 # Symbolic link for the home directory
-ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc
+ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc # can we use /root/.bashrc?
+
 
 echo "symbolic links created successfully!"
