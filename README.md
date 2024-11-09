@@ -25,7 +25,7 @@ The options you can give to this command are -p, -s, or -a.
 - -s will only create the symbolic links
 - -a will install the packages and create the symbolic links
 
-In your case it will be convenient to usa -a to run all the scrips at once using the format below.
+In your case it will be convenient to use -a to run all the scrips at once using the format below.
 
 ```
 sudo ./main_script -a
