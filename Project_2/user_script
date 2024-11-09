@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# Check if the user is root or can run sudo. If the User ID is not equal to 0 (root user)
+
+if [[ ! "$UID" -eq 0 ]]; then
+    echo "You must run this script as sudo or root. Ex 'sudo ./user_script' and don't forget to 'chmod +x main_script' before that"
+    exit 1
+fi
+
+username=""
+password=""
+shell=""
+
+# Use getopts to get the username, and shell from the user
+# The options are -u for username and -s for shell
+# If the user does not provide an option we will echo a message to let them know they need to provide an option
+# If the user provides an option that is not -u, or -s we will echo a message to let them know the option is invalid
+# For creating a password we will just prompt the user use the passwd command to set the password for the user after the script is run
+while getopts ":u:p:s:" opt; do
+  case "${opt}" in
+    u)
+        username=${OPTARG}
+        ;;
+    s)
+        shell=${OPTARG}
+        ;;
+    :)
+        echo "Error: -${OPTARG} requires an argument"
+        exit 1
+      ;;
+    ?)
+        echo "Invalid option: -${OPTARG}"
+        exit 1
+      ;;
+  esac
+done
+
+# Check if the user provided a username, password, and shell. If not, exit with an error message 
+# to let the user know they need to provide all three arguments
+if [[ -z $username || -z $shell ]]; then
+    echo "Please provide a username, a password, and a shell"
+    exit 1
+fi
+
+# Check if the user already exists by using grep to search for the username in /etc/passwd
+# If the username is found, exit with an error message to let the user know the user already exists
+if grep "$username" /etc/passwd; then
+    echo "Error: User '$username' already exists."
+    exit 1
+fi
+
+# Set the home directory for the user
+home_dir="/home/$username"
+
+# Add entry to /etc/passwd 
+# The entry will be in the format: username:x:1000:1000::/home/username:/bin/bash
+# The >> command will append to the end of the /etc/passwd file
+echo "$username:x:1000:1000::$home_dir:$shell" >> /etc/passwd
+
+# Create the home directory for the user
+# Copy the contents of /etc/skel to the home directory
+# Change the ownership of the home directory to the user
+mkdir -p "$home_dir"
+cp -r /etc/skel/. "$home_dir"
+chown -R "$username:$username" "$home_dir"
+
+# Check if the user was created successfully by checking if the username, password, and shell are not empty
+# If the user was created successfully, echo a message to let the user know the user has been created
+if [[ -n $username && -n $shell ]]; then
+    echo "User $username has been created with a password and shell $shell"
+fi
