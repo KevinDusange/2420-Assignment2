@@ -56,12 +56,12 @@ fi
 # Set the home directory for the user
 home_dir="/home/$username"
 
-# Find the next available user ID (UID) between 1000 and 60000 (this range is typically used for regular users) REFERENCE: https://www.cyberciti.biz/faq/understanding-etcshadow-file/
-# The awk command will search for user IDs between 1000 and 60000 in /etc/passwd
+# Find the next available user ID (UID) between 1000 and 65533 (this range is typically used for regular users) REFERENCE: week 5 notes
+# The awk command will search for user IDs between 1000 and 65533 in /etc/passwd
 # The -F: flag sets the field separator to : (since /etc/passwd is colon-separated)
 # The tail command will get the last line (which will be the highest user ID)
 # The new user ID will be the highest user ID + 1
-user_id=$(awk -F: '{if ($3>=1000 && $3<60000) print $3}' /etc/passwd | tail -n 1)
+user_id=$(awk -F: '{if ($3>=1000 && $3<65533) print $3}' /etc/passwd | tail -n 1)
 user_id=$((user_id + 1))
 
 # Generate a unique Group ID (GID) for the use
