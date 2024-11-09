@@ -85,3 +85,4 @@ ex. kevin4:x:1003:1003::/home/kevin4:/bin/bash
 - https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/
 - https://linuxize.com/post/linux-chown-command/
 - https://devhints.io/bash
+- https://stackoverflow.com/questions/714915/using-the-passwd-command-from-within-a-shell-script
