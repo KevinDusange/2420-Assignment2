@@ -28,7 +28,7 @@ ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc
 # We can use -L to check if the file is a symbolic link 
 # Use the && operator to check if all the symbolic links were created successfully
 if [[ -L ~/.config && -L ~/bin && -L ~/.bashrc ]]; then
-	echo "symbolics link created successfully!"
+	echo "symbolic links created successfully!"
 else
 	echo "symbolic links were not created!"
 	exit 1
