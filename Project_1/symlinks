@@ -30,6 +30,6 @@ ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc
 if [[ -L ~/.config && -L ~/bin && -L ~/.bashrc ]]; then
 	echo "symbolics link created successfully!"
 else
-	echo "symbolic links were no created!"
+	echo "symbolic links were not created!"
 	exit 1
 fi
