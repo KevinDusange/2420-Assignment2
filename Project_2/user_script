@@ -61,6 +61,7 @@ home_dir="/home/$username"
 # The -F: flag sets the field separator to : (since /etc/passwd is colon-separated)
 # The tail command will get the last line (which will be the highest user ID)
 # The new user ID will be the highest user ID + 1
+# We will use (( )) to perform arithmetic operations
 user_id=$(awk -F: '{if ($3>=1000 && $3<65533) print $3}' /etc/passwd | tail -n 1)
 user_id=$((user_id + 1))
 
@@ -72,6 +73,11 @@ group_id=$user_id
 # The entry will be in the format: username:x:1000:1000::/home/username:/bin/bash
 # The >> command will append to the end of the /etc/passwd file
 echo "$username:x:$user_id:$group_id::$home_dir:$shell" >> /etc/passwd
+
+# Add entry to /etc/group
+# The entry will be in the format: username:x:1000
+# The >> command will append to the end of the /etc/group file
+echo "$username:x:$group_id:" >> /etc/group
 
 # We can use chpasswd to set the password for the user
 # The format for chpasswd is username:password
@@ -87,8 +93,12 @@ mkdir -p "$home_dir"
 cp -r /etc/skel/. "$home_dir"
 chown -R "$username:$username" "$home_dir"
 
-# Check if the user was created successfully by checking if the username, password, and shell are not empty
-# If the user was created successfully, echo a message to let the user know the user has been created
-if [[ -n $username && -n $password && -n $shell ]]; then
-    echo "User $username has been created with a password and shell $shell"
+# Check if the user was created successfully
+# Print a message to let the user know the user has been created successfully if the username is found in /etc/passwd
+# Otherwise print an error message
+if grep "$username" /etc/passwd; then
+    echo "User $username has been created with password and shell $shell."
+else
+    echo "Error: Failed to create user $username."
+    exit 1
 fi
