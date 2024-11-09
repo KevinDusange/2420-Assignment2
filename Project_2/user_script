@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # Check if the user is root or can run sudo. If the User ID is not equal to 0 (root user)
-
+# the prompt below will echo to the terminal to let the user know they need to run as sudo or root.
 if [[ ! "$UID" -eq 0 ]]; then
     echo "You must run this script as sudo or root. Ex 'sudo ./user_script' and don't forget to 'chmod +x user_script' before that"
     exit 1
 fi
 
+# Define the variables for the username, password, and shell
+# The variables will be empty by default
 username=""
 password=""
 shell=""
@@ -69,7 +71,7 @@ group_id=$user_id
 # Add entry to /etc/passwd 
 # The entry will be in the format: username:x:1000:1000::/home/username:/bin/bash
 # The >> command will append to the end of the /etc/passwd file
-echo "$username:x:1000:1000::$home_dir:$shell" >> /etc/passwd
+echo "$username:x:$user_id:$group_id::$home_dir:$shell" >> /etc/passwd
 
 # We can use chpasswd to set the password for the user
 # The format for chpasswd is username:password
