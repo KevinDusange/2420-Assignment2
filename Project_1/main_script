@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# This script will run the main script of the project
-# it will create the symbolic links for the config, bin, and home directories
-# and it will install the packages from the packages.txt file
-
 # Check if the user is root or can run sudo. If the User ID is not equal to 0 (root user)
-
+# the prompt below will echo to the terminal to let the user know they need to run as sudo or root.
 if [[ ! "$UID" -eq 0 ]]; then
     echo "You must run this script as sudo or root. Ex 'sudo ./main_script' and don't forget to 'chmod +x main_script' before that"
     exit 1

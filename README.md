@@ -25,12 +25,51 @@ The options you can give to this command are -p, -s, or -a.
 - -s will only create the symbolic links
 - -a will install the packages and create the symbolic links
 
-In your case it will be convenient to use -a to run all the scrips at once using the format below.
+The most convenient way to use this script would be to use -a to run all the scrips at once using the format below.
 
 ```
 sudo ./main_script -a
 ```
 
+This will install the packages and create the symbolic links.
 
 
-### Project 2
+### Project 2 - New User Creation
+
+In this project script we will be automating the process of creating a new user. We will give the user the option to enter a username, a password, as well as their preferred shell. The script will automatically create the user, the home directory for that user, and configure the group memberships. 
+
+There is only one script neede to automate this process. The user_script script. The format to run this script is:
+
+```
+sudo ./user_script -u <new-username> -p <new-password> -s <preferred-shell>
+```
+
+This script will:
+1. Take in the options using OPTARG and save them in their respectable variables
+2. Create a User ID and a matching Group ID
+3. Update the password using chpasswd (after the user is created)
+4. Update the entries in the /etc/passwd and /etc/groups files
+
+Once the user has been created you can double check by running the command:
+
+```
+cat /etc/passwd
+```
+
+You will see the new user you just created at the bottom of this list in the following format:
+
+```
+<username>:x:<user-id>:<group-id>::/home/<username>:<shell>
+ex. kevin4:x:1003:1003::/home/kevin4:/bin/bash
+```
+
+####
+- An initial system setup with packages installed and configuration files linked.
+- The ability to add new users with a secure password and specific shell settings.
+- These projects will automate the system setup and new user creation.
+
+#### Notes
+
+- Remeber to make sure the scripts can be executable by using chmod +x <script-name>
+- Also remember to run these scripts using sudo or root privelages ex. sudo ./<script-name>
+- These scripts are made to be used on Linux based systems

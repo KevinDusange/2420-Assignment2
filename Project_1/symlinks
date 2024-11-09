@@ -1,9 +1,16 @@
 #!/bin/bash
 
+# Check if the user is root or can run sudo. If the User ID is not equal to 0 (root user)
+# the prompt below will echo to the terminal to let the user know they need to run as sudo or root.
 if [[ ! "$UID" -eq 0 ]]; then
 	echo "You must run this script as sudo or root. Ex 'sudo ./symlinks' and don't forget to 'chmod +x symlinks' before that"
 	exit 1
 fi
+
+# First we can remove the symbolic links if they already exist using the rm command
+rm ~/.config
+rm ~/bin
+rm ~/.bashrc
 
 # We can use the $USER variable which uses the current user's username executing the script.
 # This way we can use the script on any user and it will create the symbolic links for that user.
@@ -15,7 +22,14 @@ ln -s /home/$USER/2420-as2-starting-files/config ~/.config
 ln -s /home/$USER/2420-as2-starting-files/bin ~/bin
 
 # Symbolic link for the home directory
-ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc # can we use /root/.bashrc?
+ln -s /home/$USER/2420-as2-starting-files/home/bashrc ~/.bashrc
 
-
-echo "symbolic links created successfully!"
+# Check if the symbolic links were created successfully
+# We can use -L to check if the file is a symbolic link 
+# Use the && operator to check if all the symbolic links were created successfully
+if [[ -L ~/.config && -L ~/bin && -L ~/.bashrc ]]; then
+	echo "symbolics link created successfully!"
+else
+	echo "symbolic links were no created!"
+	exit 1
+fi
