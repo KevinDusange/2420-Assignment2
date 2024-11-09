@@ -86,3 +86,4 @@ ex. kevin4:x:1003:1003::/home/kevin4:/bin/bash
 - https://linuxize.com/post/linux-chown-command/
 - https://devhints.io/bash
 - https://stackoverflow.com/questions/714915/using-the-passwd-command-from-within-a-shell-script
+- https://linuxize.com/post/bash-check-if-file-exists/
