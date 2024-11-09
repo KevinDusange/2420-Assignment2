@@ -70,6 +70,6 @@ ex. kevin4:x:1003:1003::/home/kevin4:/bin/bash
 
 #### Notes
 
-- Remeber to make sure the scripts can be executable by using chmod +x <script-name>
-- Also remember to run these scripts using sudo or root privelages ex. sudo ./<script-name>
+- Remeber to make sure the scripts can be executable by using `chmod +x <script-name>`
+- Also remember to run these scripts using sudo or root privelages ex. `sudo ./<script-name>`
 - These scripts are made to be used on Linux based systems
