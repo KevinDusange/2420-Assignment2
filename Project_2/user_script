@@ -85,6 +85,7 @@ echo "$username:x:$group_id:" >> /etc/group
 # The password will be set to the value provided by the user
 # chpasswd will automatically encrypt the password and it can only run 
 # after the user has been created
+# I am using chpasswd instead of passwd because chpasswd does not require user interaction
 echo "$username:$password" | chpasswd
 
 # Create the home directory for the user
