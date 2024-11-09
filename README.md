@@ -73,3 +73,15 @@ ex. kevin4:x:1003:1003::/home/kevin4:/bin/bash
 - Remeber to make sure the scripts can be executable by using `chmod +x <script-name>`
 - Also remember to run these scripts using sudo or root privelages ex. `sudo ./<script-name>`
 - These scripts are made to be used on Linux based systems
+
+### References
+
+https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-four.md
+https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-five.md
+https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-six.md
+https://gitlab.com/cit2420/2420-notes-f24/-/blob/main/2420-notes/week-seven.md
+https://phoenixnap.com/kb/how-to-list-users-linux
+https://phoenixnap.com/kb/chpasswd
+https://linuxize.com/post/how-to-create-symbolic-links-in-linux-using-the-ln-command/
+https://linuxize.com/post/linux-chown-command/
+https://devhints.io/bash

@@ -59,6 +59,7 @@ home_dir="/home/$username"
 # Find the next available user ID (UID) between 1000 and 65533 (this range is typically used for regular users) REFERENCE: week 5 notes
 # The awk command will search for user IDs between 1000 and 65533 in /etc/passwd
 # The -F: flag sets the field separator to : (since /etc/passwd is colon-separated)
+# The if statement will check if the user ID is between 1000 and 65533 and print the user ID (third field) if it meets the condition
 # The tail command will get the last line (which will be the highest user ID)
 # The new user ID will be the highest user ID + 1
 # We will use (( )) to perform arithmetic operations
